@@ -53,15 +53,17 @@
             "DeletionPolicy": "Snapshot", 
             "Properties": {
                 "BackupRetentionPeriod": 7, 
-                "DBClusterParameterGroupName": "default.aurora-mysql5.7", 
+                "DBClusterParameterGroupName": "default.postgres9.3", 
                 "DBSubnetGroupName": {
                     "Ref": "SubnetGroup"
                 }, 
                 "DatabaseName": "db", 
-                "EnableCloudwatchLogsExports": [], 
+                "EnableCloudwatchLogsExports": [
+                    "postgres"
+                ], 
                 "EnableIAMDatabaseAuthentication": "false", 
-                "Engine": "aurora-mysql", 
-                "EngineVersion": "5.7.12", 
+                "Engine": "aurora", 
+                "EngineVersion": "9.3.10", 
                 "MasterUserPassword": {
                     "Ref": "MasterUserPassword"
                 }, 
@@ -79,7 +81,7 @@
                 "Tags": [
                     {
                         "Key": "Name", 
-                        "Value": "rds_aurora_mysql_cluster"
+                        "Value": "rds_aurora_base_cluster_cloudwatch_logs_export"
                     }
                 ], 
                 "VpcSecurityGroupIds": [
@@ -92,14 +94,14 @@
         }, 
         "SecurityGroup": {
             "Properties": {
-                "GroupDescription": "rds_aurora_mysql_cluster RDS security group", 
+                "GroupDescription": "rds_aurora_base_cluster_cloudwatch_logs_export RDS security group", 
                 "VpcId": "vpc-1234"
             }, 
             "Type": "AWS::EC2::SecurityGroup"
         }, 
         "SubnetGroup": {
             "Properties": {
-                "DBSubnetGroupDescription": "rds_aurora_mysql_cluster VPC subnet group.", 
+                "DBSubnetGroupDescription": "rds_aurora_base_cluster_cloudwatch_logs_export VPC subnet group.", 
                 "SubnetIds": [
                     "subnet-1234", 
                     "subnet-4321"

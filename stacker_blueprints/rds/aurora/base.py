@@ -54,6 +54,11 @@ class Cluster(Blueprint):
             "type": str,
             "description": "A comma separated list of subnet ids."
         },
+        "EnableCloudwatchLogsExports": {
+            "type": list,
+            "description": "List of log types to export to CloudWatch logs.",
+            "default": []
+        },
         "EnableIAMDatabaseAuthentication": {
             "type": bool,
             "description": "Whether or not to permit IAM db access.",
@@ -274,6 +279,9 @@ class Cluster(Blueprint):
             BackupRetentionPeriod=variables["BackupRetentionPeriod"],
             DBClusterParameterGroupName=parameter_group,
             DBSubnetGroupName=Ref(SUBNET_GROUP),
+            EnableCloudwatchLogsExports=variables[
+                "EnableCloudwatchLogsExports"
+            ],
             EnableIAMDatabaseAuthentication=variables[
                 "EnableIAMDatabaseAuthentication"
             ],
